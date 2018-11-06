@@ -1,3 +1,4 @@
+using Companies.SystemTests.Client;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -9,19 +10,19 @@ namespace Companies.SystemTests
     [TestFixture]
     public class SystemTestRunner
     {
-        private TestClientFactory _testClientFactory;
+        private ICompaniesApiClientFactory _clientFactory;
 
         [SetUp]
         public void SetUp()
         {
-            _testClientFactory = new TestClientFactory();
+            _clientFactory = new CompaniesApiClientFactory();
         }
 
         [Test]
         [TestCaseSource(typeof(SystemTestCases), nameof(SystemTestCases.All))]
         public async Task Run(ISystemTestCase systemTestCase)
         {
-            systemTestCase.Client = _testClientFactory.CreateTestClient();
+            systemTestCase.Client = _clientFactory.CreateClient();
 
             await systemTestCase.Given();
             await systemTestCase.When();

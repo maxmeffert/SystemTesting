@@ -1,23 +1,20 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Net.Http;
+
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Companies.Api;
 
-namespace Companies.SystemTests
+namespace Companies.SystemTests.Client
 {
-    public class TestClientFactory
+    public class CompaniesApiClientFactory : ICompaniesApiClientFactory
     {
         private const string EnvironmentName = "SystemTests";
-        public TestClient CreateTestClient()
+        public ICompaniesApiClient CreateClient()
         {
             var builder = CreateWebHostBuilder();
             var server = CreateTestServer(builder);
             var client = server.CreateClient();
 
-            return new TestClient(client);
+            return new CompaniesApiClient(client);
         }
 
         private static IWebHostBuilder CreateWebHostBuilder()
@@ -30,21 +27,6 @@ namespace Companies.SystemTests
         private static TestServer CreateTestServer(IWebHostBuilder webHostBuilder)
         {
             return new TestServer(webHostBuilder);
-        }
-    }
-
-    public class TestClient
-    {
-        private readonly HttpClient _httpClient;
-
-        public TestClient(HttpClient httpClient)
-        {
-            _httpClient = httpClient;
-        }
-
-        public Task<HttpResponseMessage> GetValuesResponse()
-        {
-            return _httpClient.GetAsync("/api/values");
         }
     }
 }
