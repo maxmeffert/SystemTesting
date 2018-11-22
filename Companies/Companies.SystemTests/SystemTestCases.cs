@@ -31,7 +31,7 @@ namespace Companies.SystemTests
         {
             yield return new DoNothing();
             yield return new GetCompaniesIsOrdertedByName();
-            yield return new GetDepartmentsIsOrdertedByName();
+            // yield return new GetDepartmentsIsOrdertedByName();
         }
 
     }
