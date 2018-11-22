@@ -35,8 +35,8 @@ namespace Companies.Tests
 
             var result = _cut.Sort(namedEntities);
 
-            // Assert.That(result, Is.Ordered.By("Name").Descending); // part of the commit that provokes a regression
-            Assert.That(result, Is.Ordered.By("Name").Ascending);
+            Assert.That(result, Is.Ordered.By("Name").Descending); // part of the commit that provokes a regression
+            // Assert.That(result, Is.Ordered.By("Name").Ascending);
         }
     }
 }

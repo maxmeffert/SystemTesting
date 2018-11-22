@@ -8,8 +8,8 @@ namespace Companies.Core.Sorting
     {
         public IEnumerable<NamedEntity> Sort(IEnumerable<NamedEntity> namedEntities)
         {
-            // return namedEntities.OrderByDescending(namedEntity => namedEntity.Name); // provokes a regression
-            return namedEntities.OrderBy(namedEntity => namedEntity.Name);
+            return namedEntities.OrderByDescending(namedEntity => namedEntity.Name); // provokes a regression
+            // return namedEntities.OrderBy(namedEntity => namedEntity.Name);
         }
     }
 }
