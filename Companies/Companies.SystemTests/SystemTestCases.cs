@@ -30,7 +30,9 @@ namespace Companies.SystemTests
         private static IEnumerable<ISystemTestCase> AllSystemTestCases()
         {
             yield return new DoNothing();
-            yield return new Scenario1();
+            yield return new GetCompaniesIsOrdertedByName();
+            yield return new GetDepartmentsIsOrdertedByName();
         }
+
     }
 }

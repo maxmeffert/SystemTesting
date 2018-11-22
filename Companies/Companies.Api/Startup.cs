@@ -10,8 +10,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Microsoft.EntityFrameworkCore;
 using Companies.Api.Controllers;
+using Companies.Core;
+using Companies.Core.Endpoints;
+using Companies.Core.Data;
+using Companies.Core.Sorting;
 
 namespace Companies.Api
 {
@@ -27,8 +30,14 @@ namespace Companies.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("todos"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddTransient<IDataContext, DataContext>();
+            services.AddTransient<INamedEntitySorter, NamedEntitySorter>();
+            services.AddTransient<ICompaniesSorter, CompaniesSorter>();
+            services.AddTransient<ICompaniesEndpoint, CompaniesEndpoint>();
+            services.AddTransient<IDepartmentsSorter, DepartmentsSorter>();
+            services.AddTransient<IDepartmentsEndpoint, DepartmentsEndpoint>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
